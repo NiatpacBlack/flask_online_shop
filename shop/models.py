@@ -19,9 +19,10 @@ class ProductModel(db.Model):
     )
     is_active = db.Column(db.Boolean, default=True)
 
-    def __int__(self, title, description, price):
+    def __int__(self, title, description, text, price):
         self.title = title
         self.description = description
+        self.text = text
         self.price = price
 
     def __repr__(self):
@@ -32,10 +33,8 @@ class CommentModel(db.Model):
     """Таблица, хранящая данные о комментариях под конкретным товаром."""
 
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, nullable=False)
-    # product_id = db.Column(db.Integer, db.ForeignKey("product_model.id", ondelete="CASCADE"))
-    # user_id = db.Column(db.Integer, db.ForeignKey("user_model.id", ondelete="CASCADE"))
+    product_id = db.Column(db.Integer, db.ForeignKey("product_model.id", ondelete="CASCADE"))
+    user_id = db.Column(db.Integer, db.ForeignKey("user_model.id", ondelete="CASCADE"))
     text = db.Column(db.Text, nullable=False)
     created_data = db.Column(
         db.DateTime, default=datetime.now(timezone("Europe/Minsk"))

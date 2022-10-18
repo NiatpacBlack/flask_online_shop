@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content_app %}
+    <div class="container">
+        <h1 class="text-center text-primary my-4">
+            Создайте свой пост
+        </h1>
+        <div class="card-body">
+            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                {{ form.csrf_token() }}
+                <div class="form-group">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <p class="text-{{ category }}">{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                {% for field in form if field.name not in ('csrf_token', 'submit') %}
+                    <div class="form-group text-center">{{ field.label() }}</div>
+                    <div class="form-group">
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="form-group">{{ form.submit }}</div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

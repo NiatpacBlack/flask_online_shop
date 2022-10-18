@@ -9,7 +9,6 @@ from config import Config
 
 db = SQLAlchemy()
 login_manager = LoginManager()
-migrate = Migrate()
 
 
 def create_app():
@@ -18,24 +17,16 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    from shop.shop import shop
     from authentication.authentication import authentication
+    from shop.shop import shop
 
-    app.register_blueprint(shop, url_prefix="/")
     app.register_blueprint(authentication, url_prefix="/authentication")
+    app.register_blueprint(shop, url_prefix="/")
 
     configure_uploads(app, photos)
 
     db.init_app(app)
     login_manager.init_app(app)
-
-    with app.app_context():
-        """Если наша база данных sqlite, выполняем миграции в пакетном режиме."""
-
-        if db.engine.url.drivername == "sqlite":
-            migrate.init_app(app, db, render_as_batch=True)
-        else:
-            migrate.init_app(app, db)
 
     return app
 

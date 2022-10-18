@@ -6,110 +6,77 @@
     <div class="container">
         <main>
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm" >
-                        <div class="card-header py-3" style="background-color: gold">
-                            <h4 class="my-0 fw-normal">Vip товар 1</h4>
+                {% if products_for_page %}
+                    {% for product in products_for_page.items %}
+                        <div class="col">
+                            <div class="card mb-4 rounded-3 shadow-sm">
+                                <div class="card-header py-3" style="background-color: gold">
+                                    <h4 class="my-0 fw-normal">{{ product.title }}</h4>
+                                </div>
+                                <div class="card-body">
+                                    <img src="{{ url_for("static", filename="media/img/") }}{{ product.image }}" alt=""
+                                         class="card-img-top">
+                                    <h1 class="card-title pricing-card-title">${{ product.price }}</h1>
+                                    <p class="card-text">{{ product.description| safe | truncate(1000) }}</p>
+                                    <div class="btn-group">
+                                        <a href="{{ url_for("shop.product_page_view", product_id=product.id) }}"
+                                           class="btn px-4 py-2 btn-lg" style="background-color: gold">Подробнее</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$15</h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-lg" style="background-color: gold">Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm" >
-                        <div class="card-header py-3" style="background-color: gold">
-                            <h4 class="my-0 fw-normal">Vip товар 2</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$15</h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-lg" style="background-color: gold">Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm" >
-                        <div class="card-header py-3" style="background-color: gold">
-                            <h4 class="my-0 fw-normal">Vip товар 2</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$15</h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-lg" style="background-color: gold">Купить</button>
+                    {% endfor %}
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-header py-3">
+                                <h4 class="my-0 fw-normal">Товар 1</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">$5</h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>ОписаниеОписаниеОписание</li>
+                                    <li>ОписаниеОписаниеОписание</li>
+                                    <li>ОписаниеОписаниеОписание</li>
+                                    <li>ОписаниеОписаниеОписание</li>
+                                </ul>
+                                <button type="button" class="w-100 btn btn-lg btn-outline-primary">Купить</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">Товар 1</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$5</h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">Товар 2</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$5</h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Купить</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">Товар 3</h4>
-                        </div>
-                        <div class="card-body">
-                            <h1 class="card-title pricing-card-title">$5</h1>
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                                <li>ОписаниеОписаниеОписание</li>
-                            </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Купить</button>
-                        </div>
-                    </div>
-                </div>
+                {% else %}
+                    <h2 class="container my-5 text-center">Увы, товаров нет :(</h2>
+                {% endif %}
             </div>
-
+            <nav aria-label="Paginate me">
+                <ul class="pagination justify-content-center">
+                    {% if products_for_page.has_prev %}
+                        <a class="page-link" href="?page={{ products_for_page.prev_num }}"
+                           tabindex="-1">Предыдущая</a>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Предыдущая</a>
+                        </li>
+                    {% endif %}
+                    {% for page_number in range(1, (products_for_page.pages + 1)) %}
+                        {% if page_number == products_for_page.page %}
+                            <li class="page-item active"><a class="page-link"
+                                                            href="?page={{ page_number }}">{{ page_number }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ page_number }}">{{ page_number }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if products_for_page.has_next %}
+                        <a class="page-link" href="?page={{ products_for_page.next_num }}">Следующая</a>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Следующая</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
         </main>
     </div>
 

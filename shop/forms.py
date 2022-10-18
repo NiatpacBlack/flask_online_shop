@@ -29,8 +29,16 @@ class CreateProductForm(FlaskForm):
         },
     )
     description = TextAreaField(
-        "Описание товара",
+        "Краткая информация о товаре",
         validators=[DataRequired(), Length(max=255)],
+        render_kw={
+            "class": "form-control",
+            "placeholder": "",
+        },
+    )
+    text = TextAreaField(
+        "Описание товара",
+        validators=[DataRequired()],
         render_kw={
             "class": "form-control",
             "placeholder": "",
