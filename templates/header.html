@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check" viewBox="0 0 16 16">
+        <title>Check</title>
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+    </symbol>
+</svg>
+
+<div class="container py-3">
+    <header>
+        <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+                <a href="{{ url_for('shop.shop_view') }}" class="navbar-brand mt-2 pr-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width="30"
+                         height="30"
+                         alt="logo">
+                </a>
+                <span class="mt-1 fs-4">Flask Shop</span>
+            </a>
+
+            <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                <a class="me-3 ml-2 py-2 text-dark text-decoration-none"
+                   href="{{ url_for('shop.shop_view') }}">Товары</a>
+                <a class="me-3 ml-2 py-2 text-dark text-decoration-none" href="#">Цены</a>
+                <a class="me-3 ml-2 py-2 text-dark text-decoration-none" href="#">Добавить товар</a>
+                <a class="me-3 ml-2 py-2 text-dark text-decoration-none"
+                   href="{{ url_for('contacts_view') }}">Контакты</a>
+                <a class="me-3 ml-2 py-2 text-dark text-decoration-none" href="{{ url_for('about_view') }}">О
+                    магазине</a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('authentication.sign_out_view') }}" class="btn btn-outline-dark ml-2">Выход</a>
+                    <span class="navbar-text text-dark mr-4 mx-2">{{ current_user.username }}</span>
+                {% else %}
+                    <a href="{{ url_for('authentication.sign_in_view') }}" class="btn btn-outline-success mx-2">Вход</a>
+                    <a href="{{ url_for('authentication.sign_up_view') }}"
+                       class="btn btn-outline-primary">Регистрация</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+</div>

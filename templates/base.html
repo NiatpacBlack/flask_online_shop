@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block title %}
+            Главная страница
+        {% endblock %}
+    </title>
+    {% block links %}
+        <!-- Bootstrap CSS -->
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+              crossorigin="anonymous">
+        <!-- My Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap"
+              rel="stylesheet">
+        <!-- My CSS -->
+        {#        <link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}" type="text/css">#}
+    {% endblock %}
+    {% block scripts %}
+        <!-- jQuery and Bootstrap Bundle -->
+        <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+                crossorigin="anonymous" defer></script>
+        <!-- My JS -->
+        {#        <script src="{{ url_for("static", filename='js/script.js') }}" defer></script>#}
+    {% endblock %}
+</head>
+<body class="bg-light">
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+<div class="main-content">
+    {% block content_app %}
+    {% endblock %}
+</div>
+
+{% block footer %}
+    {% include 'footer.html' %}
+{% endblock %}
+
+</body>
+</html>
