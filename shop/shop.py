@@ -38,8 +38,8 @@ def create_product_view():
             "title": request.form.get("title"),
             "image": photos.save(form.image.data),
             "description": request.form.get("description"),
-            "text": request.form.get("text"),
             "price": request.form.get('price'),
+            "vip_priority": request.form.get("vip_priority"),
         }
         add_product_in_product_model(product)
         return redirect(url_for("shop.shop_view"))

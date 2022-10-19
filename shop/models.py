@@ -12,12 +12,12 @@ class ProductModel(db.Model):
     title = db.Column(db.String(100), nullable=False)
     image = db.Column(db.String(255), nullable=True)
     description = db.Column(db.String(255), nullable=False)
-    text = db.Column(db.Text, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     created_data = db.Column(
         db.DateTime, default=datetime.now(timezone("Europe/Minsk"))
     )
     is_active = db.Column(db.Boolean, default=True)
+    vip_priority = db.Column(db.Boolean, default=False)
 
     def __int__(self, title, description, text, price):
         self.title = title

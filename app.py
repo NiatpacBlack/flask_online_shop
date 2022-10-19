@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, redirect, url_for, request
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -53,6 +53,23 @@ def page_not_found_view(error_text):
     """При получении ошибки 404 отобразит кастомный шаблон с информацией о ней. В консоль вернет 404 ошибку."""
 
     return render_template("404_page.html", error_text=error_text), 404
+
+
+@app.after_request
+def redirect_to_signin(response):
+    """
+    Перенаправляет на страницу авторизации и сохраняет в аргумент next url страницы, на которую заходили.
+    В случае если не авторизированный пользователь заходит на страницу, требующую авторизации.
+    """
+
+    if response.status_code == 401:
+        flash(
+            "Пожалуйста войдите в свой аккаунт или зарегистрируйтесь, чтобы попасть в данный раздел.",
+            "success",
+        )
+        return redirect(url_for("authentication.sign_in_view", next_page=request.url))
+
+    return response
 
 
 if __name__ == '__main__':

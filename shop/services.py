@@ -4,14 +4,22 @@ from shop.models import ProductModel, CommentModel
 
 
 def add_product_in_product_model(product: dict[str]) -> None:
-    """Добавляет данные из словаря product в таблицу ProductModel."""
+    """
+    Добавляет данные из словаря product в таблицу ProductModel.
+
+    Проверяет параметр vip_priority, если он есть, добавляет товару статус vip.
+    """
+
+    vip_priority = False
+    if product["vip_priority"] is not None:
+        vip_priority = True
 
     db_object = ProductModel(
         title=product["title"],
         image=product["image"],
         description=product["description"],
-        text=product["text"],
         price=product["price"],
+        vip_priority=vip_priority,
     )
     db.session.add(db_object)
     db.session.commit()
@@ -19,12 +27,22 @@ def add_product_in_product_model(product: dict[str]) -> None:
 
 def get_all_products_from_product_model_on_page(page: int):
     """
-    Возвращает QuerySet состоящий из всех продуктов из таблицы ProductModel.
+    Возвращает QuerySet состоящий из всех товаров из таблицы ProductModel.
 
     Продукты соответствуют текущей странице page.
     """
 
     return ProductModel.query.order_by(ProductModel.id.desc()).paginate(page=page, per_page=9)
+
+
+# def get_all_vip_product_from_product_model_on_page(page: int):
+#     """
+#     Возвращает QuerySet состоящий из всех товаров из таблицы ProductModel.
+#
+#     Продукты соответствуют текущей странице page.
+#     """
+#
+#     return ProductModel.query.filter_by(vip_priority=1).order_by(ProductModel.id.desc()).paginate(page=page, per_page=9)
 
 
 def get_product_from_product_model_where_id(product_id: int):
@@ -64,4 +82,3 @@ def get_comments_from_comments_table_where_post_id(product_id: int):
         .join(CommentModel, UserModel.id == CommentModel.user_id)
         .filter_by(product_id=product_id)[::-1]
     )
-

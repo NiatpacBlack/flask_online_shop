@@ -1,8 +1,8 @@
 from flask_uploads import UploadSet, IMAGES
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
-from wtforms import StringField, SubmitField, TextAreaField, FileField, IntegerField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, SubmitField, TextAreaField, FileField, IntegerField, BooleanField
+from wtforms.validators import DataRequired, Length, NumberRange
 
 photos = UploadSet("photos", IMAGES)
 
@@ -14,7 +14,7 @@ class CreateProductForm(FlaskForm):
         "Название товара",
         validators=[DataRequired(), Length(max=100)],
         render_kw={
-            "class": "form-control form-control-lg",
+            "class": "form-control form-control-lg mb-4",
             "placeholder": "",
         },
     )
@@ -25,32 +25,30 @@ class CreateProductForm(FlaskForm):
             FileAllowed(photos, "Загрузить можно только изображение"),
         ],
         render_kw={
-            "class": "form-control-file",
+            "class": "form-control-file mb-4",
         },
     )
     description = TextAreaField(
-        "Краткая информация о товаре",
+        "Информация о товаре",
         validators=[DataRequired(), Length(max=255)],
         render_kw={
-            "class": "form-control",
-            "placeholder": "",
-        },
-    )
-    text = TextAreaField(
-        "Описание товара",
-        validators=[DataRequired()],
-        render_kw={
-            "class": "form-control",
+            "class": "form-control mb-4",
             "placeholder": "",
         },
     )
     price = IntegerField(
         'Цена товара',
-        validators=[DataRequired()],
+        validators=[DataRequired(), NumberRange(min=1, max=100000)],
         render_kw={
-            "class": "form-control",
+            "class": "form-control mb-4",
             "placeholder": "",
         },
+    )
+    vip_priority = BooleanField(
+        "Задать товару VIP статус?",
+        render_kw={
+            "class": "form-check-input mb-4",
+        }
     )
     submit = SubmitField(
         "Добавить",
