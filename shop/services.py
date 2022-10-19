@@ -32,7 +32,7 @@ def get_all_products_from_product_model_on_page(page: int):
     Продукты соответствуют текущей странице page.
     """
 
-    return ProductModel.query.order_by(ProductModel.id.desc()).paginate(page=page, per_page=9)
+    return ProductModel.query.order_by(ProductModel.vip_priority == 1).paginate(page=page, per_page=9)
 
 
 # def get_all_vip_product_from_product_model_on_page(page: int):
@@ -61,7 +61,7 @@ def add_comment_in_comments_table(comment: dict[str]) -> None:
     """Добавляет данные из словаря comment в таблицу CommentModel."""
 
     db_object = CommentModel(
-        post_id=comment["post_id"],
+        product_id=comment["product_id"],
         user_id=comment["user_id"],
         text=comment["text"],
     )

@@ -72,8 +72,8 @@ def product_page_view(product_id):
         add_comment_in_comments_table(comment)
     return render_template(
         "shop/product_page.html",
-        post=get_product_from_product_model_where_id(product_id),
-        five_last_posts=get_five_last_products_from_product_table(product_id),
+        product=get_product_from_product_model_where_id(product_id),
+        five_last_products=get_five_last_products_from_product_table(product_id),
         comment_form=comment_form,
         all_comments=get_comments_from_comments_table_where_post_id(product_id),
     )

@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+    {{ product.title }}
+{% endblock %}
+{% block content_app %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 text-break">
+                <nav aria-label="breadcrumb" class="mt-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ url_for("shop.shop_view") }}">Товары</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+                    </ol>
+                </nav>
+                <img class="img-fluid rounded" src="{{ url_for("static", filename="media/img/") }}{{ product.image }}" alt="">
+                <hr>
+                <p class="lead">{{ product.description }}</p>
+                <hr>
+                <h1 class="h1 text-center"><b>{{ product.price }}$</b></h1>
+                <button type="button" class="w-100 btn btn-lg btn-success">Добавить в корзину</button>
+                <hr>
+                <div class="text-right">Добавлен {{ product.created_data.date() }}</div>
+                <hr>
+                {% include 'shop/product_page_comments.html' %}
+            </div>
+        {% include 'shop/product_page_aside.html' %}
+        </div>
+    </div>
+{% endblock %}

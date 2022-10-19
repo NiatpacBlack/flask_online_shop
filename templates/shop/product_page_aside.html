@@ -1,0 +1,15 @@
+<div class="col-md-4">
+    <div class="card my-4">
+        <h5 class="card-header">Другие товары</h5>
+        {% for last_product in five_last_products %}
+            <div class="card-body">
+                <h5 class="card-title">{{ last_product.title }}</h5>
+                <img src="{{ url_for("static", filename="media/img/") }}{{ last_product.image }}" alt=""
+                     class="card-img-top my-2"><br>
+                <p>{{ last_product.description| truncate(100) }}</p><br>
+                <a href="{{ url_for('shop.product_page_view', product_id=last_product.id) }}" class="card-link">Подробнее</a>
+                <hr>
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -26,7 +26,7 @@ class ProductModel(db.Model):
         self.price = price
 
     def __repr__(self):
-        return f"<ProductModel {self.id}>"
+        return f"<ProductModel {self.id} vip {self.vip_priority}>"
 
 
 class CommentModel(db.Model):

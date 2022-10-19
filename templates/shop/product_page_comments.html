@@ -1,0 +1,37 @@
+<div class="card my-4">
+    <h5 class="card-header">Прокомментируй:</h5>
+    {% if current_user.is_authenticated %}
+        <div class="card-body">
+            <form action="" class="form-horizontal" method="post">
+                {{ comment_form.csrf_token() }}
+                <div class="form-group">
+                    {{ comment_form.text }}
+                    {% for error in comment_form.text.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group center-block">
+                    {{ comment_form.submit }}
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <h6 class="card-header">
+            <a href="{{ url_for('authentication.sign_in_view', next_page=request.url) }}">Авторизуйтесь</a> или <a
+                href="{{ url_for('authentication.sign_up_view', next_page=request.url) }}">Зарегистрируйтесь</a>
+            чтобы оставить комментарий
+        </h6>
+    {% endif %}
+</div>
+{% for comment in all_comments %}
+    <div class="media mb-4" id="foot_anchor">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body text-break">
+            <span class="d-flex justify-content-between mb-2">
+                <p class="h4 text-light bg-dark rounded p-1">{{ comment.UserModel.username }}</p>
+                <p class="pt-2 pr-2 text-center mt-0 h6">{{ comment.CommentModel.created_data.ctime() }}</p>
+            </span>
+            <div>{{ comment.CommentModel.text }}</div>
+        </div>
+    </div>
+{% endfor %}
