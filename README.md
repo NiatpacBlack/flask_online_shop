@@ -17,3 +17,5 @@
 * альтернативный вариант для Unix-систем - установите gunicorn `pip3 install gunicorn` и введите команду `gunicorn --bind 127.0.0.1:5000 app:app`, в данном случае приложение будет доступно в локальной сети.
 * aльтернативный вариант для Windows - установите waitress `pip install waitress` и введите команду `waitress-serve --listen=127.0.0.1:5000 app:app`
 
+## Превью сайта
+![Peek market](https://user-images.githubusercontent.com/84034483/196797408-c453b963-51cb-4999-b7f7-9c2f5d6a4646.gif)
