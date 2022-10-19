@@ -22,10 +22,11 @@
                    href="{{ url_for('shop.shop_view') }}">Товары</a>
                 <a class="me-3 ml-2 py-2 text-dark text-decoration-none"
                    href="{{ url_for('shop.create_product_view') }}">Добавить товар</a>
-                <a class="me-3 ml-2 py-2 text-dark text-decoration-none" href="{{ url_for('about_view') }}">О
+                <a class="me-3 ml-2 py-2 text-dark text-decoration-none" href="{{ url_for('shop.about_view') }}">О
                     магазине</a>
                 <a class="me-3 ml-2 py-2 text-dark text-decoration-none"
-                   href="{{ url_for('contacts_view') }}">Корзина товаров</a>
+                   href="{{ url_for('shop.shopping_cart_view') }}">Корзина товаров
+                    ({{ session['product_data'] | length }})</a>
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('authentication.sign_out_view') }}" class="btn btn-outline-dark ml-2">Выход</a>
                     <span class="navbar-text text-dark mr-4 mx-2">{{ current_user.username }}</span>

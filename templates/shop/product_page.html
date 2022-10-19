@@ -12,18 +12,32 @@
                         <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
                     </ol>
                 </nav>
-                <img class="img-fluid rounded" src="{{ url_for("static", filename="media/img/") }}{{ product.image }}" alt="">
+                <img class="img-fluid rounded" src="{{ url_for("static", filename="media/img/") }}{{ product.image }}"
+                     alt="">
                 <hr>
                 <p class="lead">{{ product.description }}</p>
                 <hr>
                 <h1 class="h1 text-center"><b>{{ product.price }}$</b></h1>
-                <button type="button" class="w-100 btn btn-lg btn-success">Добавить в корзину</button>
+
+                <form action="" method="post">
+                    <label for="product_count" class="form-control mb-2">
+                        <input type="number" name="product_count" min="1" max="99" size="20"
+                               class="form-control mr-sm-2" placeholder="Количество">
+                    </label>
+                    {% if current_user.is_authenticated %}
+                        <button type="submit" class="w-100 btn btn-lg btn-success">Добавить в корзину</button>
+                    {% else %}
+                        <button type="submit" class="w-100 btn btn-lg btn-success disabled">Добавить в корзину</button>
+                    {% endif %}
+                </form>
+
+
                 <hr>
                 <div class="text-right">Добавлен {{ product.created_data.date() }}</div>
                 <hr>
                 {% include 'shop/product_page_comments.html' %}
             </div>
-        {% include 'shop/product_page_aside.html' %}
+            {% include 'shop/product_page_aside.html' %}
         </div>
     </div>
 {% endblock %}

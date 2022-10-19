@@ -33,7 +33,9 @@ class CommentModel(db.Model):
     """Таблица, хранящая данные о комментариях под конкретным товаром."""
 
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey("product_model.id", ondelete="CASCADE"))
+    product_id = db.Column(
+        db.Integer, db.ForeignKey("product_model.id", ondelete="CASCADE")
+    )
     user_id = db.Column(db.Integer, db.ForeignKey("user_model.id", ondelete="CASCADE"))
     text = db.Column(db.Text, nullable=False)
     created_data = db.Column(

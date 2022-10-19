@@ -1,7 +1,14 @@
 from flask_uploads import UploadSet, IMAGES
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
-from wtforms import StringField, SubmitField, TextAreaField, FileField, IntegerField, BooleanField
+from wtforms import (
+    StringField,
+    SubmitField,
+    TextAreaField,
+    FileField,
+    IntegerField,
+    BooleanField,
+)
 from wtforms.validators import DataRequired, Length, NumberRange
 
 photos = UploadSet("photos", IMAGES)
@@ -37,7 +44,7 @@ class CreateProductForm(FlaskForm):
         },
     )
     price = IntegerField(
-        'Цена товара',
+        "Цена товара",
         validators=[DataRequired(), NumberRange(min=1, max=100000)],
         render_kw={
             "class": "form-control mb-4",
@@ -48,7 +55,7 @@ class CreateProductForm(FlaskForm):
         "Задать товару VIP статус?",
         render_kw={
             "class": "form-check-input mb-4",
-        }
+        },
     )
     submit = SubmitField(
         "Добавить",

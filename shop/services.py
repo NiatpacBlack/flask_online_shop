@@ -1,3 +1,5 @@
+from flask import session
+
 from app import db
 from authentication.models import UserModel
 from shop.models import ProductModel, CommentModel
@@ -29,20 +31,12 @@ def get_all_products_from_product_model_on_page(page: int):
     """
     Возвращает QuerySet состоящий из всех товаров из таблицы ProductModel.
 
-    Продукты соответствуют текущей странице page.
+    Продукты соответствуют текущей странице page и отсортированы начиная с продуктов vip.
     """
 
-    return ProductModel.query.order_by(ProductModel.vip_priority == 1).paginate(page=page, per_page=9)
-
-
-# def get_all_vip_product_from_product_model_on_page(page: int):
-#     """
-#     Возвращает QuerySet состоящий из всех товаров из таблицы ProductModel.
-#
-#     Продукты соответствуют текущей странице page.
-#     """
-#
-#     return ProductModel.query.filter_by(vip_priority=1).order_by(ProductModel.id.desc()).paginate(page=page, per_page=9)
+    return ProductModel.query.order_by(ProductModel.vip_priority.desc()).paginate(
+        page=page, per_page=9
+    )
 
 
 def get_product_from_product_model_where_id(product_id: int):
@@ -82,3 +76,13 @@ def get_comments_from_comments_table_where_post_id(product_id: int):
         .join(CommentModel, UserModel.id == CommentModel.user_id)
         .filter_by(product_id=product_id)[::-1]
     )
+
+
+def get_total_price_of_products_in_cart() -> int:
+    """Возвращает общую сумму цен текущих товаров в корзине."""
+
+    total_price = 0
+    for product in session["product_data"]:
+        total_price += int(product["sum"])
+
+    return total_price

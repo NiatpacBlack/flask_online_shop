@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content_app %}
+    <div class="container">
+        <h1 class="text-center my-2">Ваша корзина товаров</h1>
+        <div class="form-group mt-5">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="text-center text-{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% if session['product_data'] %}
+            <ul class="list-group">
+                {% for product in session['product_data'] %}
+                    <li class="list-group-item">{{ product.title }} Цена: {{ product.price }}$
+                        Количество: {{ product.count }} <b>Сумма: {{ product.sum }}$</b></li>
+                {% endfor %}
+            </ul>
+            <h3 class="text-center my-3">Сумма к оплате: {{ total_price }}$</h3>
+            <div class="d-flex justify-content-center">
+                <form action="" method="post">
+                    <input type="submit" name="cart_clear" min="1" max="99" size="20"
+                           class="btn btn-lg btn-danger mr-sm-2 mt-3" value="Очистить корзину">
+                </form>
+                <form action="" method="post">
+                    <input type="submit" name="cart_confirm" min="1" max="99" size="20"
+                           class="btn btn-block btn-lg btn-success mr-sm-2 mt-3" value="Перейти к оплате">
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

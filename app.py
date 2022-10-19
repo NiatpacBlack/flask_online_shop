@@ -1,11 +1,10 @@
 from flask import Flask, render_template, flash, redirect, url_for, request
 from flask_login import LoginManager
-from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import configure_uploads
 
-from shop.forms import photos
 from config import Config
+from shop.forms import photos
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -34,20 +33,6 @@ def create_app():
 app = create_app()
 
 
-@app.route('/about')
-def about_view():
-    """Отображение страницы 'О нас'."""
-
-    return render_template('about_page.html')
-
-
-@app.route('/contacts')
-def contacts_view():
-    """Отображение страницы контактов."""
-
-    return render_template('contacts_page.html')
-
-
 @app.errorhandler(404)
 def page_not_found_view(error_text):
     """При получении ошибки 404 отобразит кастомный шаблон с информацией о ней. В консоль вернет 404 ошибку."""
@@ -72,5 +57,5 @@ def redirect_to_signin(response):
     return response
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)

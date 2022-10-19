@@ -19,7 +19,6 @@
                                              alt=""
                                              class="card-img-top">
                                         <h1 class="card-title pricing-card-title">${{ product.price }}</h1>
-{#                                        <p class="card-text">{{ product.description| safe | truncate(50) }}</p>#}
                                         <div class="btn-group">
                                             <a href="{{ url_for("shop.product_page_view", product_id=product.id) }}"
                                                class="btn px-4 py-2 btn-lg" style="background-color: gold">Подробнее</a>
@@ -27,10 +26,7 @@
                                     </div>
                                 </div>
                             </div>
-                        {% endif %}
-                    {% endfor %}
-                    {% for product in products_for_page.items %}
-                        {% if product.vip_priority == 0 %}
+                        {% else %}
                             <div class="col">
                                 <div class="card mb-4 rounded-3 shadow-sm">
                                     <div class="card-header py-3">
@@ -41,7 +37,6 @@
                                              alt=""
                                              class="card-img-top">
                                         <h1 class="card-title pricing-card-title">${{ product.price }}</h1>
-{#                                        <p class="card-text">{{ product.description| safe | truncate(50) }}</p>#}
                                         <div class="btn-group">
                                             <a href="{{ url_for("shop.product_page_view", product_id=product.id) }}"
                                                class="btn px-4 py-2 btn-lg btn-outline-primary">Подробнее</a>
@@ -50,6 +45,7 @@
                                 </div>
                             </div>
                         {% endif %}
+
                     {% endfor %}
                 {% else %}
                     <h2 class="container my-5 text-center">Увы, товаров нет :(</h2>
